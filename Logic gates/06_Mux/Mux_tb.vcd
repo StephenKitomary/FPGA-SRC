@@ -1,0 +1,255 @@
+$date
+	Tue Oct 22 09:19:07 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Mux_tb $end
+$var wire 1 ! out_cmp $end
+$var wire 1 " out $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$var reg 1 % fail $end
+$var reg 1 & sel $end
+$scope module MUX $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 & sel $end
+$var wire 1 " out $end
+$var wire 1 ' or1_out $end
+$var wire 1 ( notb $end
+$var wire 1 ) nota $end
+$var wire 1 * not_sel $end
+$var wire 1 + b_sel $end
+$var wire 1 , and4_out $end
+$var wire 1 - and3_out $end
+$var wire 1 . and2_out $end
+$var wire 1 / ab $end
+$scope module and_1 $end
+$var wire 1 $ a $end
+$var wire 1 & b $end
+$var wire 1 0 n_out $end
+$var wire 1 + out $end
+$upscope $end
+$scope module and_2 $end
+$var wire 1 + b $end
+$var wire 1 1 n_out $end
+$var wire 1 . out $end
+$var wire 1 ) a $end
+$upscope $end
+$scope module and_3 $end
+$var wire 1 # a $end
+$var wire 1 2 n_out $end
+$var wire 1 - out $end
+$var wire 1 ( b $end
+$upscope $end
+$scope module and_4 $end
+$var wire 1 - a $end
+$var wire 1 3 n_out $end
+$var wire 1 , out $end
+$var wire 1 * b $end
+$upscope $end
+$scope module and_5 $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 4 n_out $end
+$var wire 1 / out $end
+$upscope $end
+$scope module not_1 $end
+$var wire 1 # in $end
+$var wire 1 ) out $end
+$scope module Nand_1 $end
+$var wire 1 # a $end
+$var wire 1 # b $end
+$var wire 1 ) out $end
+$upscope $end
+$upscope $end
+$scope module not_2 $end
+$var wire 1 $ in $end
+$var wire 1 ( out $end
+$scope module Nand_1 $end
+$var wire 1 $ a $end
+$var wire 1 $ b $end
+$var wire 1 ( out $end
+$upscope $end
+$upscope $end
+$scope module not_3 $end
+$var wire 1 & in $end
+$var wire 1 * out $end
+$scope module Nand_1 $end
+$var wire 1 & a $end
+$var wire 1 & b $end
+$var wire 1 * out $end
+$upscope $end
+$upscope $end
+$scope module or_1 $end
+$var wire 1 . a $end
+$var wire 1 , b $end
+$var wire 1 ' out $end
+$var wire 1 5 n_b $end
+$var wire 1 6 n_a $end
+$scope module Nand_1 $end
+$var wire 1 ' out $end
+$var wire 1 5 b $end
+$var wire 1 6 a $end
+$upscope $end
+$scope module not_a $end
+$var wire 1 . in $end
+$var wire 1 6 out $end
+$scope module Nand_1 $end
+$var wire 1 . a $end
+$var wire 1 . b $end
+$var wire 1 6 out $end
+$upscope $end
+$upscope $end
+$scope module not_b $end
+$var wire 1 , in $end
+$var wire 1 5 out $end
+$scope module Nand_1 $end
+$var wire 1 , a $end
+$var wire 1 , b $end
+$var wire 1 5 out $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module or_2 $end
+$var wire 1 ' a $end
+$var wire 1 / b $end
+$var wire 1 " out $end
+$var wire 1 7 n_b $end
+$var wire 1 8 n_a $end
+$scope module Nand_1 $end
+$var wire 1 " out $end
+$var wire 1 7 b $end
+$var wire 1 8 a $end
+$upscope $end
+$scope module not_a $end
+$var wire 1 ' in $end
+$var wire 1 8 out $end
+$scope module Nand_1 $end
+$var wire 1 ' a $end
+$var wire 1 ' b $end
+$var wire 1 8 out $end
+$upscope $end
+$upscope $end
+$scope module not_b $end
+$var wire 1 / in $end
+$var wire 1 7 out $end
+$scope module Nand_1 $end
+$var wire 1 / a $end
+$var wire 1 / b $end
+$var wire 1 7 out $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task check $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+18
+17
+16
+15
+14
+13
+12
+11
+10
+0/
+0.
+0-
+0,
+0+
+1*
+1)
+1(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#1
+0*
+1&
+#2
+1*
+0(
+0&
+1$
+#3
+1"
+08
+1'
+06
+1.
+01
+1+
+1!
+00
+0*
+1&
+#4
+1"
+05
+08
+1,
+1'
+03
+16
+1-
+0.
+0+
+02
+11
+1*
+10
+1(
+0)
+0&
+0$
+1#
+#5
+0"
+18
+0'
+15
+0,
+13
+0!
+0*
+1&
+#6
+18
+0'
+15
+1"
+0,
+07
+0-
+13
+1/
+12
+1*
+1!
+04
+0(
+0&
+1$
+#7
+1+
+00
+0*
+1&
+#8
