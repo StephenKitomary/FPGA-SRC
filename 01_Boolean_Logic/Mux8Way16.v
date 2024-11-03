@@ -15,9 +15,18 @@ module Mux8Way16(
 	input [15:0] g,
 	input [15:0] h,
    	input [2:0] sel,
-	output [15:0] out
+	output reg [15:0] out
 );
-
-	// Put your code here:
-
+	always @(*) begin
+		case (sel)
+			0 : out = a;
+			1 : out = b;
+			2 : out = c;
+			3 : out = d;
+			4 : out = e;
+			5 : out = f;
+			6 : out = g;
+			7 : out = h;
+		endcase
+	end
 endmodule
