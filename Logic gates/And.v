@@ -12,7 +12,6 @@ module And(
     output wire out
 );
 
-// your implementation comes here:
 
 wire n_out;
 

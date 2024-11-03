@@ -5,12 +5,17 @@
  */
 
 `default_nettype none
+
 module And(
-	input a,
-	input b,
-	output out
+    input wire a,
+    input wire b,
+    output wire out
 );
 
-	// Put your code here:
+
+wire n_out;
+
+nand(n_out, a, b);
+nand(out, n_out, n_out);
 
 endmodule
