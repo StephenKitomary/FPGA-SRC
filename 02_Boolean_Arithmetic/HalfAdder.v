@@ -9,7 +9,7 @@ module HalfAdder(
 	output sum,	//Right bit of a + b
 	output carry	//Lef bit of a + b
 );
-
-	// Put your code here:
+	Xor Xor_1(a, b, sum);
+	And And_1(a, b, carry);
 
 endmodule

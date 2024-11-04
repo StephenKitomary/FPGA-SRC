@@ -11,6 +11,9 @@ module FullAdder(
 	output carry	//Left bit of a + b + c
 );
 
-	// Put your code here:
+	wire sums, carrys, carryss, throw;
+	HalfAdder HalfAdder0(a, b, sums, carrys);
+	HalfAdder HalfAdder1(sums, c, sum, carryss);
+	HalfAdder HalfAdder2(carrys, carryss, carry, throw);
 
 endmodule

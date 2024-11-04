@@ -1,0 +1,153 @@
+$date
+	Mon Nov  4 10:27:45 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module HalfAdder_tb $end
+$var wire 1 ! sum $end
+$var wire 2 " out_cmp [1:0] $end
+$var wire 1 # carry $end
+$var reg 1 $ a $end
+$var reg 1 % b $end
+$var reg 1 & fail $end
+$scope module HALFADDER $end
+$var wire 1 $ a $end
+$var wire 1 % b $end
+$var wire 1 ! sum $end
+$var wire 1 # carry $end
+$scope module And_1 $end
+$var wire 1 $ a $end
+$var wire 1 % b $end
+$var wire 1 ' n_out $end
+$var wire 1 # out $end
+$upscope $end
+$scope module Xor_1 $end
+$var wire 1 $ a $end
+$var wire 1 % b $end
+$var wire 1 ! out $end
+$var wire 1 ( n_b_a $end
+$var wire 1 ) n_b $end
+$var wire 1 * n_a_b $end
+$var wire 1 + n_a $end
+$scope module and_n_a_b $end
+$var wire 1 % b $end
+$var wire 1 , n_out $end
+$var wire 1 * out $end
+$var wire 1 + a $end
+$upscope $end
+$scope module and_n_b_a $end
+$var wire 1 $ a $end
+$var wire 1 - n_out $end
+$var wire 1 ( out $end
+$var wire 1 ) b $end
+$upscope $end
+$scope module not_a $end
+$var wire 1 $ in $end
+$var wire 1 + out $end
+$scope module Nand_1 $end
+$var wire 1 $ a $end
+$var wire 1 $ b $end
+$var wire 1 + out $end
+$upscope $end
+$upscope $end
+$scope module not_b $end
+$var wire 1 % in $end
+$var wire 1 ) out $end
+$scope module Nand_1 $end
+$var wire 1 % a $end
+$var wire 1 % b $end
+$var wire 1 ) out $end
+$upscope $end
+$upscope $end
+$scope module or_o $end
+$var wire 1 * a $end
+$var wire 1 ( b $end
+$var wire 1 ! out $end
+$var wire 1 . n_b $end
+$var wire 1 / n_a $end
+$scope module Nand_1 $end
+$var wire 1 ! out $end
+$var wire 1 . b $end
+$var wire 1 / a $end
+$upscope $end
+$scope module not_a $end
+$var wire 1 * in $end
+$var wire 1 / out $end
+$scope module Nand_1 $end
+$var wire 1 * a $end
+$var wire 1 * b $end
+$var wire 1 / out $end
+$upscope $end
+$upscope $end
+$scope module not_b $end
+$var wire 1 ( in $end
+$var wire 1 . out $end
+$scope module Nand_1 $end
+$var wire 1 ( a $end
+$var wire 1 ( b $end
+$var wire 1 . out $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task check $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1/
+1.
+1-
+1,
+1+
+0*
+1)
+0(
+1'
+0&
+0%
+0$
+0#
+b0 "
+0!
+$end
+#1
+1!
+0/
+1*
+0,
+0)
+b1 "
+1%
+#2
+0.
+1/
+1(
+0*
+0-
+1,
+1)
+0+
+0%
+b1 "
+1$
+#3
+0!
+1.
+0(
+1#
+1-
+0'
+0)
+b10 "
+1%
+#4
