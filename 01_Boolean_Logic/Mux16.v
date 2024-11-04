@@ -12,7 +12,7 @@ module Mux16(
     output wire [15:0] out
 );
 
-// your implementation comes here:
+
 
 Mux Mux_0(a[0], b[0], sel, out[0]);
 Mux Mux_1(a[1], b[1], sel, out[1]);

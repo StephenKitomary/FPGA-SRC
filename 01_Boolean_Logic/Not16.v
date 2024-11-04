@@ -9,7 +9,7 @@ module Not16(
     output wire [15:0] out
 );
 
-// your implementation comes here:
+
 
 Not Not0(in[0], out[0]);
 Not Not1(in[1], out[1]);

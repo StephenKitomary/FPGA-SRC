@@ -12,7 +12,6 @@ module Mux(
     output wire out
 );
 
-// your implementation comes here:
 
 wire ab, nota, notb, not_sel, b_sel, and2_out, and3_out, and4_out, and5_out, or1_out;
 
