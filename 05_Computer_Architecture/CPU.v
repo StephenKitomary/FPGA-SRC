@@ -42,11 +42,9 @@ module CPU(
 	wire loadD;
 	wire [15:0] outD;
 	wire [15:0] outSecondMux;
-	wire [15:0] outM;
 	wire [15:0] outAlu;
 	wire outZr;
 	wire outNg;
-	wire writeM;
 	wire jeq;
 	wire jlt;
 	wire NotoutZr;
