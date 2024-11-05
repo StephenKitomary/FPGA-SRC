@@ -11,24 +11,38 @@ module Add16(
 	output [15:0] out
 );
 
-wire carry0, carry1, carry2, carry3, carry4, carry5, carry6, carry7, carry8, carry9, carry10, carry11, carry12, carry13, carry14, carry15;
+	wire c0;
+	wire c1;
+	wire c2;
+	wire c3;
+	wire c4;
+	wire c5;
+	wire c6;
+	wire c7;
+	wire c8;
+	wire c9;
+	wire c10;
+	wire c11;
+	wire c12;
+	wire c13;
+	wire c14;
+	wire c15;
 
-HalfAdder HalfAdder_0(a[0], b[0], out[0], carry0);
-FullAdder FullAdder_1(a[1], b[1], carry0, out[1], carry1);
-FullAdder FullAdder_2(a[2], b[2], carry1, out[2], carry2);
-FullAdder FullAdder_3(a[3], b[3], carry2, out[3], carry3);
-FullAdder FullAdder_4(a[4], b[4], carry3, out[4], carry4);
-FullAdder FullAdder_5(a[5], b[5], carry4, out[5], carry5);
-FullAdder FullAdder_6(a[6], b[6], carry5, out[6], carry6);
-FullAdder FullAdder_7(a[7], b[7], carry6, out[7], carry7);
-FullAdder FullAdder_8(a[8], b[8], carry7, out[8], carry8);
-FullAdder FullAdder_9(a[9], b[9], carry8, out[9], carry9);
-FullAdder FullAdder_10(a[10], b[10], carry9, out[10], carry10);
-FullAdder FullAdder_11(a[11], b[11], carry10, out[11], carry11);
-FullAdder FullAdder_12(a[12], b[12], carry11, out[12], carry12);
-FullAdder FullAdder_13(a[13], b[13], carry12, out[13], carry13);
-FullAdder FullAdder_14(a[14], b[14], carry13, out[14], carry14);
-FullAdder FullAdder_15(a[15], b[15], carry14, out[15], carry15);
-
+	FullAdder adder0(.a(a[0]), .b(b[0]), .c(1'b0), .sum(out[0]), .carry(c0));
+	FullAdder adder1(.a(a[1]), .b(b[1]), .c(c0), .sum(out[1]), .carry(c1));
+	FullAdder adder2(.a(a[2]), .b(b[2]), .c(c1), .sum(out[2]), .carry(c2));
+	FullAdder adder3(.a(a[3]), .b(b[3]), .c(c2), .sum(out[3]), .carry(c3));
+	FullAdder adder4(.a(a[4]), .b(b[4]), .c(c3), .sum(out[4]), .carry(c4));
+	FullAdder adder5(.a(a[5]), .b(b[5]), .c(c4), .sum(out[5]), .carry(c5));
+	FullAdder adder6(.a(a[6]), .b(b[6]), .c(c5), .sum(out[6]), .carry(c6));
+	FullAdder adder7(.a(a[7]), .b(b[7]), .c(c6), .sum(out[7]), .carry(c7));
+	FullAdder adder8(.a(a[8]), .b(b[8]), .c(c7), .sum(out[8]), .carry(c8));
+	FullAdder adder9(.a(a[9]), .b(b[9]), .c(c8), .sum(out[9]), .carry(c9));
+	FullAdder adder10(.a(a[10]), .b(b[10]), .c(c9), .sum(out[10]), .carry(c10));
+	FullAdder adder11(.a(a[11]), .b(b[11]), .c(c10), .sum(out[11]), .carry(c11));
+	FullAdder adder12(.a(a[12]), .b(b[12]), .c(c11), .sum(out[12]), .carry(c12));
+	FullAdder adder13(.a(a[13]), .b(b[13]), .c(c12), .sum(out[13]), .carry(c13));
+	FullAdder adder14(.a(a[14]), .b(b[14]), .c(c13), .sum(out[14]), .carry(c14));
+	FullAdder adder15(.a(a[15]), .b(b[15]), .c(c14), .sum(out[15]), .carry(c15));
 
 endmodule

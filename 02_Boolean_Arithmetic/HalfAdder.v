@@ -6,10 +6,10 @@
 module HalfAdder(
 	input a,		//1-bit input
 	input b,		//1-bit inpur
-	output sum,	//Right bit of a + b
+	output sum,	    //Right bit of a + b
 	output carry	//Lef bit of a + b
 );
-	Xor Xor_1(a, b, sum);
-	And And_1(a, b, carry);
+	Xor xor0(.a(a), .b(b), .out(sum));
+	And and0(.a(a), .b(b), .out(carry));
 
 endmodule

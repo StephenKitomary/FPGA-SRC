@@ -6,21 +6,14 @@
 
 `default_nettype none
 module DMux(
-    input wire in,
-    input wire sel,
-    output wire a,
-    output wire b
+	input in,
+	input sel,
+    output a,
+	output b
 );
-
-    // Internal wire for the negated selection signal
-    wire not_sel;
-
-    // Invert the select signal
-    Not not_1(sel, not_sel);
-
-    // Output logic
-    And and_1(in, not_sel, a); // a = in when sel == 0
-    And and_2(in, sel, b);     // b = in when sel == 1
+	wire notSel;
+	Not not0(.in(sel), .out(notSel));
+	And and0(.a(in), .b(notSel), .out(a));
+	And and1(.a(in), .b(sel), .out(b));
 
 endmodule
-

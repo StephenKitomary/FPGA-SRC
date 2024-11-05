@@ -15,18 +15,13 @@ module Mux8Way16(
 	input [15:0] g,
 	input [15:0] h,
    	input [2:0] sel,
-	output reg [15:0] out
+	output [15:0] out
 );
-	always @(*) begin
-		case (sel)
-			0 : out = a;
-			1 : out = b;
-			2 : out = c;
-			3 : out = d;
-			4 : out = e;
-			5 : out = f;
-			6 : out = g;
-			7 : out = h;
-		endcase
-	end
+	wire [15:0] abcd;
+	wire [15:0] efgh;
+
+	Mux4Way16 mux0(.a(a), .b(b), .c(c), .d(d), .sel(sel[1:0]), .out(abcd));
+	Mux4Way16 mux1(.a(e), .b(f), .c(g), .d(h), .sel(sel[1:0]), .out(efgh));
+	Mux16 mux2(.a(abcd), .b(efgh), .sel(sel[2]), .out(out));
+
 endmodule

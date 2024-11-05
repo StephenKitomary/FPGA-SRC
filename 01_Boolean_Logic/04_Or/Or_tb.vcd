@@ -1,0 +1,68 @@
+$date
+	Tue Nov  5 07:30:27 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Or_tb $end
+$var wire 1 ! out_cmp $end
+$var wire 1 " out $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$var reg 1 % fail $end
+$scope module OR $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 & w2 $end
+$var wire 1 ' w1 $end
+$var wire 1 " out $end
+$scope module nand0 $end
+$var wire 1 # a $end
+$var wire 1 # b $end
+$var wire 1 ' out $end
+$upscope $end
+$scope module nand1 $end
+$var wire 1 $ a $end
+$var wire 1 $ b $end
+$var wire 1 & out $end
+$upscope $end
+$scope module nand2 $end
+$var wire 1 ' a $end
+$var wire 1 & b $end
+$var wire 1 " out $end
+$upscope $end
+$upscope $end
+$scope task check $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1'
+1&
+0%
+0$
+0#
+0"
+0!
+$end
+#1
+1"
+0&
+1!
+1$
+#2
+1&
+0'
+0$
+1#
+#3
+0&
+1$
+#4

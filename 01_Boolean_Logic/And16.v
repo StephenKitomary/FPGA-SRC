@@ -5,28 +5,25 @@
 
 `default_nettype none
 module And16(
-	input wire [15:0] a,
-	input wire [15:0] b,
-	output wire [15:0] out
+	input [15:0] a,
+	input [15:0] b,
+	output [15:0] out
 );
-
-// your implementation comes here:
-
-And And_0(a[0], b[0], out[0]);
-And And_1(a[1], b[1], out[1]);
-And And_2(a[2], b[2], out[2]);
-And And_3(a[3], b[3], out[3]);
-And And_4(a[4], b[4], out[4]);
-And And_5(a[5], b[5], out[5]);
-And And_6(a[6], b[6], out[6]);
-And And_7(a[7], b[7], out[7]);
-And And_8(a[8], b[8], out[8]);
-And And_9(a[9], b[9], out[9]);
-And And_10(a[10], b[10], out[10]);
-And And_11(a[11], b[11], out[11]);
-And And_12(a[12], b[12], out[12]);
-And And_13(a[13], b[13], out[13]);
-And And_14(a[14], b[14], out[14]);
-And And_15(a[15], b[15], out[15]);
+	And and0(.a(a[0]), .b(b[0]), .out(out[0]));
+	And and1(.a(a[1]), .b(b[1]), .out(out[1]));
+	And and2(.a(a[2]), .b(b[2]), .out(out[2]));
+	And and3(.a(a[3]), .b(b[3]), .out(out[3]));
+	And and4(.a(a[4]), .b(b[4]), .out(out[4]));
+	And and5(.a(a[5]), .b(b[5]), .out(out[5]));
+	And and6(.a(a[6]), .b(b[6]), .out(out[6]));
+	And and7(.a(a[7]), .b(b[7]), .out(out[7]));
+	And and8(.a(a[8]), .b(b[8]), .out(out[8]));
+	And and9(.a(a[9]), .b(b[9]), .out(out[9]));
+	And and10(.a(a[10]), .b(b[10]), .out(out[10]));
+	And and11(.a(a[11]), .b(b[11]), .out(out[11]));
+	And and12(.a(a[12]), .b(b[12]), .out(out[12]));
+	And and13(.a(a[13]), .b(b[13]), .out(out[13]));
+	And and14(.a(a[14]), .b(b[14]), .out(out[14]));
+	And and15(.a(a[15]), .b(b[15]), .out(out[15]));
 
 endmodule

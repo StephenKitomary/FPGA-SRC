@@ -10,11 +10,13 @@ module Or(
 	input b,
 	output out
 );
+	wire w1;
+	wire w2;
 
-wire n_a, n_b;
+	Nand nand0(.a(a), .b(a), .out(w1));
+	Nand nand1(.a(b), .b(b), .out(w2));
+	Nand nand2(.a(w1), .b(w2), .out(out));
 
-Not not_a(a, n_a);
-Not not_b(b, n_b);
-Nand Nand_1(n_a, n_b, out);
+	// Put your code here:
 
 endmodule

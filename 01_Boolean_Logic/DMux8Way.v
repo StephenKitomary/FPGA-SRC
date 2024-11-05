@@ -19,14 +19,11 @@ module DMux8Way(
 	output g,
 	output h
 );
+	wire abcd;
+	wire efgh;
 
-	assign a = (sel==0)?in:0;
-	assign b = (sel==1)?in:0;
-	assign c = (sel==2)?in:0;
-	assign d = (sel==3)?in:0;
-	assign e = (sel==4)?in:0;
-	assign f = (sel==5)?in:0;
-	assign g = (sel==6)?in:0;
-	assign h = (sel==7)?in:0;
-	
+	DMux dmux0(.in(in), .sel(sel[2]), .a(abcd), .b(efgh));
+	DMux4Way dmux1(.in(abcd), .sel(sel[1:0]), .a(a), .b(b), .c(c), .d(d));
+	DMux4Way dmux2(.in(efgh), .sel(sel[1:0]), .a(e), .b(f), .c(g), .d(h));
+
 endmodule

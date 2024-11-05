@@ -2,15 +2,14 @@
  * Not gate:
  * out = not in
  */
+
 `default_nettype none
-
 module Not(
-    input wire in,
-    output wire out
+	input in,
+	output out
 );
+	nand(out,in,in);
 
-
-
-Nand Nand_1(in, in, out);
+	// Put your code here:
 
 endmodule

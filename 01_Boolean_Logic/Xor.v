@@ -9,13 +9,15 @@ module Xor(
 	input b,
 	output out
 );
-
-wire n_a, n_b, n_a_b, n_b_a;
-
-Not not_a(a, n_a);
-Not not_b(b, n_b);
-And and_n_a_b(n_a, b, n_a_b);
-And and_n_b_a(a, n_b, n_b_a);
-Or or_o(n_a_b, n_b_a, out);
+	wire notA;
+	wire notB;
+	wire aAndNotB;
+	wire notAandB;
+	Not not0(.in(a),.out(notA));
+	Not not1(.in(b),.out(notB));
+	And and0(.a(a),.b(notB),.out(aAndNotB));
+	And and1(.a(notA),.b(b),.out(notAandB));
+	Or or0(.a(aAndNotB),.b(notAandB),.out(out));
+	// Put your code here:
 
 endmodule
