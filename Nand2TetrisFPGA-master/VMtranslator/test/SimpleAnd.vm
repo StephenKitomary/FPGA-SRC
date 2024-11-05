@@ -1,6 +1,0 @@
-function Sys.init 0
-push constant 2
-push constant 3
-and
-label INFLOOP
-goto INFLOOP
