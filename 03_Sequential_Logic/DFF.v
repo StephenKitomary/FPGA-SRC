@@ -1,20 +1,15 @@
-/**
-* Data-Flip-Flop
-* out[t+1] = in[t]
-*/
-
 `default_nettype none
 module DFF(
-		input clk,
-		input in,
-		output out
+    input clk,
+    input in,
+    output reg out  // Declares 'out' as a reg directly in the port list
 );
 
-	// No need to implement this chip
-	// This chip is implemented in verilog using reg-variables
-	reg out;
-	always @(posedge clk)
-		if (in) out <= 1'b1;
-		else out <= 1'b0;
+    always @(posedge clk) begin
+        if (in) 
+            out <= 1'b1;
+        else 
+            out <= 1'b0;
+    end
 
 endmodule
