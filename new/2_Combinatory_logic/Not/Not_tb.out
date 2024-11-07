@@ -1,0 +1,60 @@
+#! /usr/bin/vvp
+:ivl_version "10.2 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x5626eab5a130 .scope module, "Not_tb" "Not_tb" 2 1;
+ .timescale 0 0;
+v0x5626eabb6810_0 .var/i "file", 31 0;
+v0x5626eabb68f0_0 .var "in", 0 0;
+v0x5626eabb6a00_0 .net "out", 0 0, L_0x5626eabb6af0;  1 drivers
+S_0x5626eab5a2b0 .scope module, "NOT" "Not" 2 5, 3 5 0, S_0x5626eab5a130;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in"
+    .port_info 1 /OUTPUT 1 "out"
+v0x5626eabb6480_0 .net "in", 0 0, v0x5626eabb68f0_0;  1 drivers
+v0x5626eabb6550_0 .net "out", 0 0, L_0x5626eabb6af0;  alias, 1 drivers
+S_0x5626eab90480 .scope module, "NAND" "Nand" 3 9, 4 1 0, S_0x5626eab5a2b0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x7f28aec85018 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+L_0x5626eabb6af0 .functor NAND 1, v0x5626eabb68f0_0, L_0x7f28aec85018, C4<1>, C4<1>;
+v0x5626eab906a0_0 .net "a", 0 0, v0x5626eabb68f0_0;  alias, 1 drivers
+v0x5626eabb62a0_0 .net "b", 0 0, L_0x7f28aec85018;  1 drivers
+v0x5626eabb6360_0 .net "out", 0 0, L_0x5626eabb6af0;  alias, 1 drivers
+S_0x5626eabb6640 .scope task, "display" "display" 2 15, 2 15 0, S_0x5626eab5a130;
+ .timescale 0 0;
+TD_Not_tb.display ;
+    %delay 1, 0;
+    %vpi_call 2 17 "$fwrite", v0x5626eabb6810_0, "|   %0b   |   %0b   |\012", v0x5626eabb68f0_0, v0x5626eabb6a00_0 {0 0 0};
+    %end;
+    .scope S_0x5626eab5a130;
+T_1 ;
+    %vpi_call 2 7 "$dumpfile", "Not_tb.vcd" {0 0 0};
+    %vpi_call 2 8 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x5626eab5a130 {0 0 0};
+    %vpi_func 2 9 "$fopen" 32, "Not.out", "w" {0 0 0};
+    %store/vec4 v0x5626eabb6810_0, 0, 32;
+    %vpi_call 2 10 "$fwrite", v0x5626eabb6810_0, "|  in   |  out  |\012" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x5626eabb68f0_0, 0, 1;
+    %fork TD_Not_tb.display, S_0x5626eabb6640;
+    %join;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x5626eabb68f0_0, 0, 1;
+    %fork TD_Not_tb.display, S_0x5626eabb6640;
+    %join;
+    %vpi_call 2 13 "$fclose", v0x5626eabb6810_0 {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "Not_tb.v";
+    "Not.v";
+    "../Nand/Nand.v";

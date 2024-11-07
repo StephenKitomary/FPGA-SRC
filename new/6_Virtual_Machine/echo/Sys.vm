@@ -1,0 +1,8 @@
+function Sys.init 0
+
+	label WHILE
+	call UART.rx 0
+	call UART.tx 1	
+	pop temp 0
+	goto WHILE
+

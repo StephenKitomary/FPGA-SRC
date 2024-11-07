@@ -1,0 +1,76 @@
+function Sys.init 4
+call GPIO.init 0
+pop temp 0
+call UART.init 0
+pop temp 0
+call Memory.init 0
+pop temp 0
+call Array.init 0
+pop temp 0
+call Math.init 0
+pop temp 0
+call String.init 0
+pop temp 0
+push constant 5
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 81
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 40
+call String.appendChar 2
+call UART.print 1
+pop temp 0
+label while16
+push constant 1
+neg
+not
+if-goto whileend16
+push constant 5
+call String.new 1
+push constant 83
+call String.appendChar 2
+push constant 81
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 40
+call String.appendChar 2
+call UART.print 1
+pop temp 0
+call UART.input 0
+pop local 3
+push constant 2
+call String.new 1
+push constant 41
+call String.appendChar 2
+push constant 61
+call String.appendChar 2
+call UART.print 1
+pop temp 0
+push local 3
+call String.intValue 1
+pop local 2
+push local 2
+call Math.sqrt 1
+pop local 2
+push local 3
+push local 2
+call String.setInt 2
+pop temp 0
+push local 3
+call UART.println 1
+pop temp 0
+push local 3
+call String.dispose 1
+pop temp 0
+goto while16
+label whileend16
+push constant 0
+return

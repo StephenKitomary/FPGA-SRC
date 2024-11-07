@@ -1,0 +1,18 @@
+[*]
+[*] GTKWave Analyzer v3.3.98 (w)1999-2019 BSI
+[*] Sun Mar 22 15:36:23 2020
+[*]
+[dumpfile] "/home/micha/git/iCE40/nand2tetris/hack/cpu_tb.vcd"
+[dumpfile_mtime] "Sun Mar 22 15:36:17 2020"
+[dumpfile_size] 11515
+[savefile] "/home/micha/git/iCE40/nand2tetris/hack/cpu_tb.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] -1 -1
+*-6.033441 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 238
+[signals_width] 78
+[sst_expanded] 1
+[sst_vpaned_height] 138
+[pattern_trace] 1
+[pattern_trace] 0

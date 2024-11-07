@@ -1,0 +1,47 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/KeyboardTest/Main.jack
+
+/** Test program for the OS Keyboard class. */
+class Main {
+
+    /** Gets input from the user and verifies its contents. */
+    function void main() {
+        var boolean ok;
+		var char c;
+		var String s;
+		var int i;
+		let c=0;
+		do Output.printString("Keyboardtest started");
+		do Output.println();
+        do Output.printString("Press Key '3':");
+		while (~(c=51)){
+			let c = Keyboard.readChar();
+			do Output.println();
+        	do Output.printString("Pressed");
+			do Output.printInt(c);
+			do Output.println();
+        }
+	
+    	let ok = false;
+        do Output.printString("readLine test:");
+        do Output.println();
+        do Output.printString("(Verify echo and usage of 'backspace')");
+        do Output.println();
+        while (~ok) {
+    	    let s = Keyboard.readLine("Please type 'JACK' and press enter: ");
+
+	        if (s.length() = 4) {
+	            if ((s.charAt(0) = 74) & (s.charAt(1) = 65) & (s.charAt(2) = 67) & (s.charAt(3) = 75)) {
+	                do Output.printString("ok");
+   	                do Output.println();
+   	                let ok = true;
+   	            }
+    	    }
+    	}
+
+        
+        return;
+    }
+}

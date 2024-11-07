@@ -1,0 +1,15 @@
+/** Test program for the OS Sys class. */
+class Main {
+	
+    /** Tests the wait method of the Sys class. */
+    function void main() {
+		var int i;
+		let i=20;
+       	while(i>0){ 
+        	do Sys.wait(1000);
+			do GPIO.setLed(GPIO.getLed()+1);
+			let i=i-1;
+		}
+        return;
+    }
+}

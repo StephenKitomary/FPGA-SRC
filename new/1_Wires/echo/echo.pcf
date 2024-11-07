@@ -1,0 +1,7 @@
+#set_io clk_in J3
+#set_io but1 K11
+#set_io but2 P13
+#set_io led1 M12
+#set_io led2 R16
+set_io rx L11
+set_io tx T16

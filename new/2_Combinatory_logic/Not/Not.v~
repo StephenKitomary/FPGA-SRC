@@ -1,0 +1,12 @@
+/**
+ * Not gate:
+ * out = not in
+ */
+module Not(in, out);
+
+	input in;
+	output out;
+	Nand NAND(.a(in),.b(true),.out(out));
+
+endmodule
+

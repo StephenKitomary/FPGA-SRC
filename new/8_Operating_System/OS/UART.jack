@@ -1,0 +1,57 @@
+class UART {
+	static Array uart;
+ 
+	function void init(){
+		let uart = 8194;
+		return;
+	}
+  
+	function int rx() {
+		var int data;
+		let data = -1;
+		while (data=(-1)){
+			let data = uart[1];
+		}
+		let uart[1] = -1;
+		return data;
+   	}
+
+   	function void tx(int c){
+		var boolean ready;
+		let ready = false;
+		while (~ready) {
+			let ready = uart[0];
+		}
+      	let uart[0] = c;
+		return;
+   	}
+	
+	function void print(String s){
+		var int i;
+		let i=0;
+		while (i<(s.length())){
+			do UART.tx(s.charAt(i));
+			let i=i+1;
+		}
+		return;
+	}
+	function void println(String s){
+		do UART.print(s);
+		do UART.tx(13);
+		do UART.tx(10);
+		return;
+	}
+	
+	function String input(){
+		var String s;
+		var char c;
+		let s=String.new(80);
+		let c=UART.rx();
+		while (~(c=13)){
+			do s.appendChar(c);
+			do UART.tx(c);
+			let c=UART.rx();
+		}
+		return s;
+	}
+}

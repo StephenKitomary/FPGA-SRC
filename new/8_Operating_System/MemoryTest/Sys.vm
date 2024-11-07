@@ -1,0 +1,56 @@
+function Sys.init 2
+call GPIO.init 0
+pop temp 0
+call UART.init 0
+pop temp 0
+call Memory.init 0
+pop temp 0
+label while8
+push constant 1
+neg
+not
+if-goto whileend8
+push constant 0
+pop local 1
+label while10
+push local 1
+push constant 10
+lt
+not
+if-goto whileend10
+push constant 3000
+push local 1
+add
+call UART.rx 0
+call Memory.poke 2
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto while10
+label whileend10
+push constant 0
+pop local 1
+label while16
+push local 1
+push constant 10
+lt
+not
+if-goto whileend16
+push constant 3000
+push local 1
+add
+call Memory.peek 1
+call UART.tx 1
+pop temp 0
+push local 1
+push constant 1
+add
+pop local 1
+goto while16
+label whileend16
+goto while8
+label whileend8
+push constant 0
+return

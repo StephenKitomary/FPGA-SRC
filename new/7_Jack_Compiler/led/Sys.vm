@@ -1,0 +1,24 @@
+function Sys.init 1
+push constant 8192
+pop local 0
+label while2
+push constant 1
+neg
+not
+if-goto whileend2
+push constant 0
+push local 0
+add
+push local 0
+push constant 1
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto while2
+label whileend2
+push constant 0
+return

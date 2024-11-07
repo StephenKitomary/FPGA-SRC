@@ -1,0 +1,5 @@
+# set_io clk_in J3
+set_io a K11
+set_io b P13
+set_io out[0] M12
+set_io out[1] R16

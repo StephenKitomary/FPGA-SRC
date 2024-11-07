@@ -1,0 +1,37 @@
+$date
+	Wed Apr  8 08:02:33 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module Not_tb $end
+$var wire 1 ! out $end
+$var reg 1 " in $end
+$var integer 32 # file [31:0] $end
+$scope module NOT $end
+$var wire 1 " in $end
+$var wire 1 ! out $end
+$scope module NAND $end
+$var wire 1 " a $end
+$var wire 1 $ b $end
+$var wire 1 ! out $end
+$upscope $end
+$upscope $end
+$scope task display $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+1$
+b10000000000000000000000000000011 #
+0"
+1!
+$end
+#1
+0!
+1"
+#2

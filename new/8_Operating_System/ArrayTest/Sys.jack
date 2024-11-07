@@ -1,0 +1,29 @@
+class Sys {
+
+    function void init() {
+		var char c;
+        var Array r;                  // stores test results
+        var int i;
+        
+		do GPIO.init();
+		do UART.init();
+		do Memory.init();
+		do Array.init();
+
+       	while (true){ 
+    	    let r = Array.new(10);
+    	   	let i=0;
+			while (i<10){
+				let r[i]=UART.rx();
+				let i=i+1;
+			} 
+    	   	let i=0;
+			while (i<10){
+				do UART.tx(r[i]);
+				let i=i+1;
+			} 
+     	   do r.dispose();
+        }
+        return;
+    }
+}

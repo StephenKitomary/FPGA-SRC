@@ -1,0 +1,12 @@
+class Sys {
+
+    function void init() {
+		var Array mem;
+		let mem = 8192;
+		while(true){
+			let mem[0] = mem[1];
+		}
+		return;
+    }
+   
+}

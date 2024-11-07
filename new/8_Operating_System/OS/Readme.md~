@@ -1,0 +1,19 @@
+Error Codes
+
+1	Sys.wait(int duration): duration negative
+2	Array.new(int size): negative size
+
+5	Memory.alloc(int size): size <  1
+6	Memory.alloc(int size): out of Memory
+
+14 String.new(int maxLength): maxLength < 1
+15 String.charAt(int j): index out of bounds
+16 String.setCharAt(int j, char c): index out of bounds
+17 String.appendChar(char c): String full
+18 String.eraseLastChar(): String is empty
+19 String.setInt(int val): String to small
+
+20 Output.moveCursor(int i, int j): Index out of bounds
+22 GPIO.getBut(int n): Index out of bounds
+23 GPIO.getLed(int n): Index out of bounds
+24 GPIO.setLed(int n, boolean state): Index out of bounds

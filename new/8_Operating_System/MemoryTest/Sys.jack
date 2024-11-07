@@ -1,0 +1,24 @@
+class Sys {
+
+    function void init() {
+		var char c;
+		var int i;
+		do GPIO.init();
+		do UART.init();
+		do Memory.init();
+       	while(true){ 
+			let i=0;
+			while (i<10){
+				do Memory.poke(3000+i,UART.rx());
+				let i=i+1;
+			}
+			
+			let i=0;
+			while (i<10){
+				do UART.tx(Memory.peek(3000+i));
+				let i=i+1;
+			}
+		}
+        return;
+    }
+}

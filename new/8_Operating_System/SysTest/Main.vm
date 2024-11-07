@@ -1,0 +1,28 @@
+function Main.main 1
+push constant 20
+pop local 0
+label while2
+push local 0
+push constant 0
+gt
+not
+if-goto whileend2
+push constant 1000
+call Sys.wait 1
+pop temp 0
+call GPIO.getLed 0
+push constant 1
+add
+call GPIO.setLed 1
+pop temp 0
+push local 0
+push constant 1
+sub
+pop local 0
+goto while2
+label whileend2
+push constant 42
+call Sys.error 1
+pop temp 0
+push constant 0
+return

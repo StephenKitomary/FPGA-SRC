@@ -1,0 +1,159 @@
+#! /usr/bin/vvp
+:ivl_version "10.2 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55b97079d130 .scope module, "DMux_tb" "DMux_tb" 2 1;
+ .timescale 0 0;
+v0x55b9708065d0_0 .net "a", 0 0, L_0x55b970806c20;  1 drivers
+v0x55b970806700_0 .net "b", 0 0, L_0x55b970806df0;  1 drivers
+v0x55b970806850_0 .var/i "file", 31 0;
+v0x55b9708068f0_0 .var "in", 0 0;
+v0x55b970806990_0 .var "sel", 0 0;
+S_0x55b97079d2b0 .scope module, "DMUX" "DMux" 2 7, 3 7 0, S_0x55b97079d130;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in"
+    .port_info 1 /INPUT 1 "sel"
+    .port_info 2 /OUTPUT 1 "a"
+    .port_info 3 /OUTPUT 1 "b"
+v0x55b970805f90_0 .net "a", 0 0, L_0x55b970806c20;  alias, 1 drivers
+v0x55b970806030_0 .net "b", 0 0, L_0x55b970806df0;  alias, 1 drivers
+v0x55b9708060f0_0 .net "in", 0 0, v0x55b9708068f0_0;  1 drivers
+v0x55b970806190_0 .net "nsel", 0 0, L_0x55b970806a30;  1 drivers
+v0x55b9708062c0_0 .net "sel", 0 0, v0x55b970806990_0;  1 drivers
+S_0x55b9707d5f40 .scope module, "anda" "And" 3 14, 4 7 0, S_0x55b97079d2b0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+v0x55b970803fb0_0 .net "a", 0 0, v0x55b9708068f0_0;  alias, 1 drivers
+v0x55b970804080_0 .net "b", 0 0, L_0x55b970806a30;  alias, 1 drivers
+v0x55b970804150_0 .net "nand1", 0 0, L_0x55b970806ae0;  1 drivers
+v0x55b970804220_0 .net "out", 0 0, L_0x55b970806c20;  alias, 1 drivers
+S_0x55b9707d6160 .scope module, "NAND1" "Nand" 4 12, 5 1 0, S_0x55b9707d5f40;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x55b970806ae0 .functor NAND 1, v0x55b9708068f0_0, L_0x55b970806a30, C4<1>, C4<1>;
+v0x55b9707d3300_0 .net "a", 0 0, v0x55b9708068f0_0;  alias, 1 drivers
+v0x55b970803550_0 .net "b", 0 0, L_0x55b970806a30;  alias, 1 drivers
+v0x55b970803610_0 .net "out", 0 0, L_0x55b970806ae0;  alias, 1 drivers
+S_0x55b970803730 .scope module, "NOT" "Not" 4 13, 6 5 0, S_0x55b9707d5f40;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in"
+    .port_info 1 /OUTPUT 1 "out"
+v0x55b970803de0_0 .net "in", 0 0, L_0x55b970806ae0;  alias, 1 drivers
+v0x55b970803ed0_0 .net "out", 0 0, L_0x55b970806c20;  alias, 1 drivers
+S_0x55b970803900 .scope module, "NAND" "Nand" 6 9, 5 1 0, S_0x55b970803730;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x7f6e145ae060 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+L_0x55b970806c20 .functor NAND 1, L_0x55b970806ae0, L_0x7f6e145ae060, C4<1>, C4<1>;
+v0x55b970803b60_0 .net "a", 0 0, L_0x55b970806ae0;  alias, 1 drivers
+v0x55b970803c20_0 .net "b", 0 0, L_0x7f6e145ae060;  1 drivers
+v0x55b970803cc0_0 .net "out", 0 0, L_0x55b970806c20;  alias, 1 drivers
+S_0x55b970804330 .scope module, "andb" "And" 3 15, 4 7 0, S_0x55b97079d2b0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+v0x55b970805350_0 .net "a", 0 0, v0x55b9708068f0_0;  alias, 1 drivers
+v0x55b9708053f0_0 .net "b", 0 0, v0x55b970806990_0;  alias, 1 drivers
+v0x55b9708054e0_0 .net "nand1", 0 0, L_0x55b970806cd0;  1 drivers
+v0x55b9708055b0_0 .net "out", 0 0, L_0x55b970806df0;  alias, 1 drivers
+S_0x55b970804550 .scope module, "NAND1" "Nand" 4 12, 5 1 0, S_0x55b970804330;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x55b970806cd0 .functor NAND 1, v0x55b9708068f0_0, v0x55b970806990_0, C4<1>, C4<1>;
+v0x55b9708047b0_0 .net "a", 0 0, v0x55b9708068f0_0;  alias, 1 drivers
+v0x55b9708048c0_0 .net "b", 0 0, v0x55b970806990_0;  alias, 1 drivers
+v0x55b970804980_0 .net "out", 0 0, L_0x55b970806cd0;  alias, 1 drivers
+S_0x55b970804aa0 .scope module, "NOT" "Not" 4 13, 6 5 0, S_0x55b970804330;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in"
+    .port_info 1 /OUTPUT 1 "out"
+v0x55b970805180_0 .net "in", 0 0, L_0x55b970806cd0;  alias, 1 drivers
+v0x55b970805270_0 .net "out", 0 0, L_0x55b970806df0;  alias, 1 drivers
+S_0x55b970804c70 .scope module, "NAND" "Nand" 6 9, 5 1 0, S_0x55b970804aa0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x7f6e145ae0a8 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+L_0x55b970806df0 .functor NAND 1, L_0x55b970806cd0, L_0x7f6e145ae0a8, C4<1>, C4<1>;
+v0x55b970804ed0_0 .net "a", 0 0, L_0x55b970806cd0;  alias, 1 drivers
+v0x55b970804f90_0 .net "b", 0 0, L_0x7f6e145ae0a8;  1 drivers
+v0x55b970805030_0 .net "out", 0 0, L_0x55b970806df0;  alias, 1 drivers
+S_0x55b9708056c0 .scope module, "notsel" "Not" 3 13, 6 5 0, S_0x55b97079d2b0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in"
+    .port_info 1 /OUTPUT 1 "out"
+v0x55b970805df0_0 .net "in", 0 0, v0x55b970806990_0;  alias, 1 drivers
+v0x55b970805e90_0 .net "out", 0 0, L_0x55b970806a30;  alias, 1 drivers
+S_0x55b970805890 .scope module, "NAND" "Nand" 6 9, 5 1 0, S_0x55b9708056c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a"
+    .port_info 1 /INPUT 1 "b"
+    .port_info 2 /OUTPUT 1 "out"
+L_0x7f6e145ae018 .functor BUFT 1, C4<1>, C4<0>, C4<0>, C4<0>;
+L_0x55b970806a30 .functor NAND 1, v0x55b970806990_0, L_0x7f6e145ae018, C4<1>, C4<1>;
+v0x55b970805ad0_0 .net "a", 0 0, v0x55b970806990_0;  alias, 1 drivers
+v0x55b970805be0_0 .net "b", 0 0, L_0x7f6e145ae018;  1 drivers
+v0x55b970805ca0_0 .net "out", 0 0, L_0x55b970806a30;  alias, 1 drivers
+S_0x55b970806430 .scope task, "display" "display" 2 19, 2 19 0, S_0x55b97079d130;
+ .timescale 0 0;
+TD_DMux_tb.display ;
+    %delay 1, 0;
+    %vpi_call 2 21 "$fwrite", v0x55b970806850_0, "|   %0b   |   %0b   |   %0b   |   %0b   |\012", v0x55b9708068f0_0, v0x55b970806990_0, v0x55b9708065d0_0, v0x55b970806700_0 {0 0 0};
+    %end;
+    .scope S_0x55b97079d130;
+T_1 ;
+    %vpi_call 2 9 "$dumpfile", "DMux_tb.vcd" {0 0 0};
+    %vpi_call 2 10 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55b97079d130 {0 0 0};
+    %vpi_func 2 11 "$fopen" 32, "DMux.out", "w" {0 0 0};
+    %store/vec4 v0x55b970806850_0, 0, 32;
+    %vpi_call 2 12 "$fwrite", v0x55b970806850_0, "|  in   |  sel  |   a   |   b   |\012" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55b9708068f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55b970806990_0, 0, 1;
+    %fork TD_DMux_tb.display, S_0x55b970806430;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55b9708068f0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55b970806990_0, 0, 1;
+    %fork TD_DMux_tb.display, S_0x55b970806430;
+    %join;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55b9708068f0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55b970806990_0, 0, 1;
+    %fork TD_DMux_tb.display, S_0x55b970806430;
+    %join;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55b9708068f0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55b970806990_0, 0, 1;
+    %fork TD_DMux_tb.display, S_0x55b970806430;
+    %join;
+    %vpi_call 2 17 "$fclose", v0x55b970806850_0 {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 7;
+    "N/A";
+    "<interactive>";
+    "DMux_tb.v";
+    "DMux.v";
+    "../And/And.v";
+    "../Nand/Nand.v";
+    "../Not/Not.v";

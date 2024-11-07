@@ -1,0 +1,26 @@
+class UART{
+
+	function int rx() {
+		var int data;
+		var Array mem;
+		let mem = 0;
+		let data = -1;
+		while (data = (-1)){		//data ready ?
+			let data=mem[8195];
+		}
+		let mem[8195]=-1;			//clear buffer
+		return data;
+   	}
+
+   function void tx(int c){
+		var boolean ready;
+		var Array mem;
+		let mem=0;
+		let ready = false;
+		while (ready = (false)) {	//ready ?
+			let ready = mem[8194];
+		}
+      	let mem[8194] = c;			//send char
+		return;
+   }
+}

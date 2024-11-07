@@ -1,0 +1,14 @@
+function Sys.init 0		//VM calls Sys.init
+
+label LOOP
+
+push constant 8197		//BUT2 on memory Map 8197
+pop pointer 0			//set pointer to memory 8197
+push this 0				//push but status to stack
+
+push constant 8195		//LED2 is on memory map 8195
+pop pointer 0			//set pointer to led2
+pop this 0				//write last stack element to led2
+
+goto LOOP				//repeat
+

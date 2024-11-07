@@ -1,0 +1,59 @@
+class Sys {
+	function void init() {
+		var int x;
+		var int vx;
+		do GPIO.init();
+		do UART.init();
+		do Memory.init();
+		do Array.init();
+		do Math.init();
+		do Screen.init();
+		do Screen.drawRectangle(5,5,30,30,Screen.BLACK() 	);
+		do Screen.drawRectangle(45,5,30,30,Screen.NAVY() 	);
+		do Screen.drawRectangle(85,5,30,30,Screen.DARKGREEN());
+		do Screen.drawRectangle(125,5,30,30,Screen.DARKCYAN());
+		do Screen.drawRectangle(165,5,30,30,Screen.MAROON()	);
+		do Screen.drawRectangle(205,5,30,30,Screen.PURPLE()	);
+		do Screen.drawRectangle(5,45,30,30,Screen.OLIVE	());
+		do Screen.drawRectangle(45,45,30,30,Screen.LIGHTGREY());
+		do Screen.drawRectangle(85,45,30,30,Screen.DARKGREY());
+		do Screen.drawRectangle(125,45,30,30,Screen.BLUE()	);
+		do Screen.drawRectangle(165,45,30,30,Screen.GREEN()	);
+		do Screen.drawRectangle(205,45,30,30,Screen.CYAN	());
+		do Screen.drawRectangle(5,85,30,30,Screen.RED 	());
+		do Screen.drawRectangle(45,85,30,30,Screen.MAGENTA());
+		do Screen.drawRectangle(85,85,30,30,Screen.YELLOW());	
+		do Screen.drawRectangle(125,85,30,30,Screen.ORANGE());
+		do Screen.drawRectangle(165,85,30,30,Screen.GREENYELLOW());
+		do Screen.drawRectangle(205,85,30,30,Screen.PINK());		
+			
+		
+		let x=0;
+		while (x<240){
+			do Screen.drawPixel(x,150,0);
+			let x=x+2;
+		}
+		do Screen.drawLine(120,200,170,200,0);
+		do Screen.drawLine(120,200,170,250,0);
+		do Screen.drawLine(120,200,120,250,0);
+		do Screen.drawLine(120,200,70,250,0);
+		do Screen.drawLine(120,200,70,200,0);
+		do Screen.drawLine(120,200,70,150,0);
+		do Screen.drawLine(120,200,120,150,0);
+		do Screen.drawLine(120,200,170,150,0);
+		let x=120;
+		let vx=10;
+		while (true){
+			do Screen.drawCircle(x,280,5,-1);
+			let x=x+vx;
+			do Screen.drawCircle(x,280,5,Screen.RED());
+			if (x>220) {
+				let vx=-10;
+			}
+			if (x<20) {
+				let vx=10;
+			}
+		}
+		return;
+	}
+}

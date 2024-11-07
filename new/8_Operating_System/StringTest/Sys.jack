@@ -1,0 +1,27 @@
+class Sys {
+
+    function void init() {
+		var char c;
+		var boolean ok;
+		var int n;
+		var String s;
+		do GPIO.init();
+		do UART.init();
+		do Memory.init();
+		do Array.init();
+		do Math.init();
+		do String.init();
+		do UART.print("SQRT(");
+		while(true){
+			do UART.print("SQRT(");
+			let s=UART.input();
+			do UART.print(")=");
+			let n=s.intValue();
+			let n=Math.sqrt(n);
+			do s.setInt(n);
+			do UART.println(s);
+			do s.dispose();	
+		}
+        return;
+    }
+}

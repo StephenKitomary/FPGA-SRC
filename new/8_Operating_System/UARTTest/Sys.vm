@@ -1,0 +1,15 @@
+function Sys.init 0
+call UART.init 0
+pop temp 0
+label while4
+push constant 1
+neg
+not
+if-goto whileend4
+call UART.rx 0
+call UART.tx 1
+pop temp 0
+goto while4
+label whileend4
+push constant 0
+return

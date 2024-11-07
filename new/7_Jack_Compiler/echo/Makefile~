@@ -1,0 +1,14 @@
+all: jack vm asm prog
+
+jack:
+	../../11_Jack_Compiler/JackCompiler.py ./
+vm:
+	../../08_Virtual_Machine/VMTranslator.py ./
+asm:
+	../../06_Assembler/assembler.py out.asm
+prog:
+	cat out.hack > /dev/ttyACM0
+clean:
+	rm -f *.vm *.asm *.hack *~
+
+.PHONY: all clean

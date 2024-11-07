@@ -1,0 +1,10 @@
+class Sys {
+
+    function void init() {
+		while(true){
+			do UART.tx(UART.rx());
+		}
+		return;
+    }
+   
+}

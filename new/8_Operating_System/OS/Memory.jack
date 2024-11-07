@@ -1,0 +1,76 @@
+/**
+ * This library provides two services: direct access to the computer's main
+ * memory (RAM), and allocation and recycling of memory blocks. The Hack RAM
+ * consists of 8192 words, each holding a 16-bit binary number.
+ */
+
+class Memory {
+	static Array mem;
+	static Array heap; 
+    
+	/** Initializes the class. */
+    function void init() {
+		let mem = 0;
+		let mem[2048]=6142;
+		let mem[2049]=2050;
+		return;
+    }
+
+    /** Returns the RAM value at the given address. */
+    function int peek(int address) {
+		return	mem[address];
+    }
+
+    /** Sets the RAM value at the given address to the given value. */
+    function void poke(int address, int value) {
+		let mem[address]=value;
+		return;
+	}
+
+    /** Finds an available RAM block of the given size and returns
+     *  a reference to its base address. */
+    function int alloc(int size) {
+	var int pos;
+	if (size<1){
+		do Sys.error(5);
+	}
+	let pos=2048;
+	while (pos[0]<size){
+		let pos=pos[1];
+	}
+	if ((pos+size)>8187){
+		do Sys.error(6);
+	}
+	if (pos[0]>(size+2)){
+		let pos[size+2]=pos[0]-size-2;
+		if (pos[1]=(pos+2)){
+			let pos[size+3]=pos+size+4;
+		}else{
+			let pos[size+3]=pos[1];
+		}
+		let pos[1]=pos+size+2;
+	}
+	let pos[0]=0;
+	return pos+2;
+
+}
+
+    /** De-allocates the given object (cast as an array) by making
+     *  it available for future allocations. */
+    function void deAlloc(Array o) {
+		var int v0,v1;
+		let v0=o-2;
+		let v1=v0[1];
+		if (v1[0]=0){
+			let v0[0]=v0[1]-v0-2;
+		}else{
+			let v0[0]=v0[1]-v0+v1[0];
+			if (v1[1]=(v1+2)){
+				let v0[1]=v0+2; 	
+			}else{
+				let v0[1]=v1[1];
+			}
+		}
+	return;
+	}    
+}

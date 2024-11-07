@@ -1,0 +1,50 @@
+(START)
+@0
+M=1
+
+(LOOP)
+(WAIT_RX) //WAIT for UART_RX
+@8195
+D=M
+@WAIT_RX
+D;JLT		
+
+@8195	//clear uart_rx
+M=-1
+
+
+@0	//store Received data
+A=M
+M=D
+@0
+MD=M+1
+@4
+D=D-A
+
+@LOOP
+D;JNE
+
+
+@0
+M=1
+(WAIT_TX)	//Wait for uart_tx ready
+@8194
+D=M
+@WAIT_TX
+D;JEQ
+
+@0	//write DATA to uart_tx
+A=M
+D=M
+@8194
+M=D
+
+@0
+MD=M+1
+@4
+D=D-A
+@WAIT_TX
+D;JNE
+
+@START
+0;JMP

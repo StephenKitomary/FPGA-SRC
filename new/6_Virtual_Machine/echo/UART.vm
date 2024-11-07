@@ -1,0 +1,32 @@
+function UART.rx 1
+	label WAIT_RX
+	push constant 8195
+	pop pointer 0
+	push this 0
+	pop local 0
+	push local 0
+	push constant 1
+	neg
+	eq
+	if-goto WAIT_RX
+
+	push constant 1
+	neg
+	pop this 0
+	
+	push local 0
+	return
+
+function UART.tx 0
+	label WAIT_TX
+	push constant 8194
+	pop pointer 0
+	push this 0
+	not
+	if-goto WAIT_TX
+	
+	push argument 0
+	pop this 0
+	push constant 0
+	return 
+
