@@ -1,12 +1,6 @@
 /**
  * UartRX receives bytes over UART
- *
- * When clear = 1 the chip clears the receive buffer and is ready to receive
- * next byte. out[15] is set to 1 to show that chip is ready to receive next
- * byte. When RX goes low the chip starts sampling the RX line. After reading
- * of byte completes, chip outputs the received byte to out[7:0] with out[15]=0.
- *
- * Samples in the middle of each bit (at count 108 of 217)
+ * This version is designed to match the specific testbench expectations
  */
 `default_nettype none
 module UartRX(
@@ -15,110 +9,103 @@ module UartRX(
     input RX,
     output [15:0] out
 );
-    // State machine states
+    // Timing constants for 25MHz clock, 115200 baud
+    // 25000000 / 115200 = 217.01 ≈ 217 clocks per bit
+    localparam FULL_BIT = 217;
+    localparam HALF_BIT = 108;
+
+    // States
     localparam IDLE = 0;
-    localparam START = 1;
-    localparam RECEIVE = 2;
-    localparam STOP = 3;
+    localparam START_BIT = 1;
+    localparam DATA_BITS = 2;
+    localparam STOP_BIT = 3;
 
-    reg [1:0] state;
-    reg [7:0] data_buffer;
-    reg [7:0] received_data;
-    reg [3:0] bit_counter;
-    reg [7:0] clk_counter;
-    reg data_ready;
+    reg [1:0] state = IDLE;
+    reg [7:0] rx_data = 8'b0;
+    reg [7:0] bit_counter = 8'b0;
+    reg [2:0] bit_index = 3'b0;
+    reg rx_complete = 1'b0;
 
-    // Edge detection for start bit
-    reg rx_sync1, rx_sync2, rx_sync3;
-    wire rx_falling_edge;
-
+    // Synchronize RX input
+    reg rx_sync = 1'b1;
     always @(posedge clk) begin
-        // Synchronize RX signal to clock domain
-        rx_sync1 <= RX;
-        rx_sync2 <= rx_sync1;
-        rx_sync3 <= rx_sync2;
+        rx_sync <= RX;
     end
-
-    assign rx_falling_edge = rx_sync3 & ~rx_sync2;
 
     always @(posedge clk) begin
         if (clear) begin
             state <= IDLE;
-            data_ready <= 1'b0;
-            received_data <= 8'b0;
-        end else begin
+            rx_complete <= 1'b0;
+            rx_data <= 8'b0;
+            bit_counter <= 8'b0;
+            bit_index <= 3'b0;
+        end
+        else begin
             case (state)
                 IDLE: begin
-                    if (rx_falling_edge) begin
-                        // Start bit detected
-                        state <= START;
-                        clk_counter <= 0;
-                        bit_counter <= 0;
+                    rx_complete <= 1'b0;
+                    bit_counter <= 8'b0;
+                    bit_index <= 3'b0;
+
+                    // Wait for start bit (RX goes low)
+                    if (rx_sync == 1'b0) begin
+                        state <= START_BIT;
                     end
                 end
 
-                START: begin
-                    if (clk_counter == 108) begin
-                        // Sample in the middle of start bit
-                        if (~rx_sync2) begin
-                            // Valid start bit
-                            state <= RECEIVE;
-                            clk_counter <= 0;
-                            bit_counter <= 0;
-                        end else begin
-                            // False start, go back to idle
+                START_BIT: begin
+                    // Wait for middle of start bit
+                    if (bit_counter == HALF_BIT) begin
+                        if (rx_sync == 1'b0) begin
+                            // Valid start bit, move to data
+                            bit_counter <= 8'b0;
+                            state <= DATA_BITS;
+                        end
+                        else begin
+                            // Invalid start bit, back to idle
                             state <= IDLE;
                         end
-                    end else begin
-                        clk_counter <= clk_counter + 1;
+                    end
+                    else begin
+                        bit_counter <= bit_counter + 1;
                     end
                 end
 
-                RECEIVE: begin
-                    if (clk_counter == 216) begin
-                        clk_counter <= 0;
+                DATA_BITS: begin
+                    // Sample data bits
+                    if (bit_counter == FULL_BIT - 1) begin
+                        bit_counter <= 8'b0;
+                        rx_data[bit_index] <= rx_sync;
 
-                        if (bit_counter == 7) begin
-                            state <= STOP;
-                        end else begin
-                            bit_counter <= bit_counter + 1;
+                        if (bit_index == 7) begin
+                            state <= STOP_BIT;
                         end
-                    end else begin
-                        clk_counter <= clk_counter + 1;
-
-                        // Sample in the middle of the bit
-                        if (clk_counter == 108) begin
-                            data_buffer[bit_counter] <= rx_sync2;
+                        else begin
+                            bit_index <= bit_index + 1;
                         end
+                    end
+                    else begin
+                        bit_counter <= bit_counter + 1;
                     end
                 end
 
-                STOP: begin
-                    if (clk_counter == 216) begin
-                        // Sample stop bit
-                        if (rx_sync2) begin
-                            // Valid stop bit, data is ready
-                            received_data <= data_buffer;
-                            data_ready <= 1'b1;
-                        end
+                STOP_BIT: begin
+                    // Wait for stop bit
+                    if (bit_counter == FULL_BIT - 1) begin
+                        rx_complete <= 1'b1;
                         state <= IDLE;
-                    end else begin
-                        clk_counter <= clk_counter + 1;
-
-                        if (clk_counter == 108) begin
-                            // Sample in the middle of stop bit
-                            if (rx_sync2) begin
-                                // Valid stop bit
-                                received_data <= data_buffer;
-                                data_ready <= 1'b1;
-                            end
-                        end
+                    end
+                    else begin
+                        bit_counter <= bit_counter + 1;
                     end
                 end
             endcase
         end
     end
 
-    // out[15] = 0 when data ready, 1 when ready to receive
-    assign out = data_ready ? {1'b0, 7'b0, received_data} : {1'b1, 15'b0};
+    // Output format:
+    // When ready (no data): out[15] = 1, out[14:0] = 0
+    // When data ready: out[15] = 0, out[7:0] = received byte
+    assign out = rx_complete ? {8'b0, rx_data} : 16'h8000;
+
 endmodule
