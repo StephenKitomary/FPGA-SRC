@@ -6,9 +6,6 @@
  * out[15] is set to high (busy). The transmission is finished after 2170 clock
  * cycles (10 bits at 217 cycles each). When transmission completes out[15] goes
  * low again (ready).
- *
- * Clock: 25MHz / 217 ≈ 115207 baud (close to 115200)
- * Format: 1 start bit (0), 8 data bits, 1 stop bit (1) = 10 bits total
  */
 `default_nettype none
 module UartTX(
@@ -18,63 +15,77 @@ module UartTX(
     output TX,
     output [15:0] out
 );
-    // State machine states
-    localparam IDLE = 0;
-    localparam TRANSMIT = 1;
+    // Constants
+    localparam CLOCKS_PER_BIT = 217;
+    localparam TOTAL_BITS = 10;  // 1 start + 8 data + 1 stop
 
-    reg state;
-    reg [7:0] data_buffer;
-    reg [3:0] bit_counter;  // Counts 0-9 (10 bits total)
-    reg [7:0] clk_counter;  // Counts 0-216 (217 clocks per bit)
-    reg tx_reg;
+    // State register (0 = ready, 1 = busy)
+    reg busy;
 
-    // Busy flag
-    wire busy = (state == TRANSMIT);
+    // Bit counter (0-216) for baud rate generation
+    reg [7:0] clk_counter;
 
-    always @(posedge clk) begin
-        case (state)
-            IDLE: begin
-                if (load) begin
-                    state <= TRANSMIT;
-                    data_buffer <= in[7:0];
-                    bit_counter <= 0;
-                    clk_counter <= 0;
-                end
-                tx_reg <= 1'b1;  // Idle state is high
-            end
+    // Bit position counter (0-9) for the 10 bits to send
+    reg [3:0] bit_counter;
 
-            TRANSMIT: begin
-                if (clk_counter == 216) begin
-                    clk_counter <= 0;
+    // Shift register to hold the data to transmit
+    // Will hold: stop bit (1), 8 data bits, start bit (0)
+    reg [9:0] tx_shift_reg;
 
-                    if (bit_counter == 9) begin
-                        // Transmission complete
-                        state <= IDLE;
-                    end else begin
-                        bit_counter <= bit_counter + 1;
-                    end
-                end else begin
-                    clk_counter <= clk_counter + 1;
-                end
+    // TX output register
+    reg tx_out;
 
-                // Output the appropriate bit
-                case (bit_counter)
-                    0: tx_reg <= 1'b0;  // Start bit
-                    1: tx_reg <= data_buffer[0];
-                    2: tx_reg <= data_buffer[1];
-                    3: tx_reg <= data_buffer[2];
-                    4: tx_reg <= data_buffer[3];
-                    5: tx_reg <= data_buffer[4];
-                    6: tx_reg <= data_buffer[5];
-                    7: tx_reg <= data_buffer[6];
-                    8: tx_reg <= data_buffer[7];
-                    9: tx_reg <= 1'b1;  // Stop bit
-                    default: tx_reg <= 1'b1;
-                endcase
-            end
-        endcase
+    // Initialize
+    initial begin
+        busy = 1'b0;
+        clk_counter = 8'b0;
+        bit_counter = 4'b0;
+        tx_shift_reg = 10'b0;
+        tx_out = 1'b1;  // Idle state is high
     end
 
-    assign TX = tx_reg;
-    assign out = {busy, 15'b0};
+    always @(posedge clk) begin
+        if (load && !busy) begin
+            // Load new byte to transmit
+            // Format: stop bit (1) + data bits + start bit (0)
+            // The shift register will shift right, so bit 0 goes out first
+            tx_shift_reg <= {1'b1, in[7:0], 1'b0};  // Stop, D7..D0, Start
+            busy <= 1'b1;
+            clk_counter <= 8'b0;
+            bit_counter <= 4'b0;
+        end
+        else if (busy) begin
+            if (clk_counter == CLOCKS_PER_BIT - 1) begin
+                // Time to move to next bit
+                clk_counter <= 8'b0;
+
+                if (bit_counter == TOTAL_BITS - 1) begin
+                    // Transmission complete
+                    busy <= 1'b0;
+                    tx_out <= 1'b1;  // Return to idle state
+                end
+                else begin
+                    // Move to next bit
+                    bit_counter <= bit_counter + 1;
+                    tx_shift_reg <= {1'b1, tx_shift_reg[9:1]};  // Shift right
+                end
+            end
+            else begin
+                // Count clock cycles
+                clk_counter <= clk_counter + 1;
+            end
+
+            // Output current bit
+            tx_out <= tx_shift_reg[0];
+        end
+        else begin
+            // Idle state
+            tx_out <= 1'b1;
+        end
+    end
+
+    // Outputs
+    assign TX = tx_out;
+    assign out = {busy, 15'b0};  // out[15] = busy flag
+
 endmodule
