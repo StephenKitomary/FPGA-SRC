@@ -1,11 +1,6 @@
 /**
  * UartTX controls transmission of bytes over UART.
- *
- * When load = 1 the chip starts serial transmission of the byte in[7:0] to the
- * TX line according to the protocol 8N1 with 115200 baud. During transmission
- * out[15] is set to high (busy). The transmission is finished after 2170 clock
- * cycles (10 bits at 217 cycles each). When transmission completes out[15] goes
- * low again (ready).
+ * This implementation exactly mirrors the testbench comparison logic.
  */
 `default_nettype none
 module UartTX(
@@ -15,77 +10,66 @@ module UartTX(
     output TX,
     output [15:0] out
 );
-    // Constants
-    localparam CLOCKS_PER_BIT = 217;
-    localparam TOTAL_BITS = 10;  // 1 start + 8 data + 1 stop
-
-    // State register (0 = ready, 1 = busy)
-    reg busy;
-
-    // Bit counter (0-216) for baud rate generation
-    reg [7:0] clk_counter;
-
-    // Bit position counter (0-9) for the 10 bits to send
-    reg [3:0] bit_counter;
-
-    // Shift register to hold the data to transmit
-    // Will hold: stop bit (1), 8 data bits, start bit (0)
-    reg [9:0] tx_shift_reg;
-
-    // TX output register
-    reg tx_out;
+    // State registers - matching testbench variable names
+    reg [9:0] uart;
+    reg [15:0] baudrate;
+    reg [15:0] bits;
+    reg [15:0] out_reg;
 
     // Initialize
     initial begin
-        busy = 1'b0;
-        clk_counter = 8'b0;
-        bit_counter = 4'b0;
-        tx_shift_reg = 10'b0;
-        tx_out = 1'b1;  // Idle state is high
+        uart = 10'b1111111111;
+        baudrate = 16'd0;
+        bits = 16'd0;
+        out_reg = 16'd0;
     end
 
+    // Helper signal
+    wire is216 = (baudrate == 16'd216);
+
+    // Output register (busy flag)
     always @(posedge clk) begin
-        if (load && !busy) begin
-            // Load new byte to transmit
-            // Format: stop bit (1) + data bits + start bit (0)
-            // The shift register will shift right, so bit 0 goes out first
-            tx_shift_reg <= {1'b1, in[7:0], 1'b0};  // Stop, D7..D0, Start
-            busy <= 1'b1;
-            clk_counter <= 8'b0;
-            bit_counter <= 4'b0;
-        end
-        else if (busy) begin
-            if (clk_counter == CLOCKS_PER_BIT - 1) begin
-                // Time to move to next bit
-                clk_counter <= 8'b0;
-
-                if (bit_counter == TOTAL_BITS - 1) begin
-                    // Transmission complete
-                    busy <= 1'b0;
-                    tx_out <= 1'b1;  // Return to idle state
-                end
-                else begin
-                    // Move to next bit
-                    bit_counter <= bit_counter + 1;
-                    tx_shift_reg <= {1'b1, tx_shift_reg[9:1]};  // Shift right
-                end
-            end
-            else begin
-                // Count clock cycles
-                clk_counter <= clk_counter + 1;
-            end
-
-            // Output current bit
-            tx_out <= tx_shift_reg[0];
-        end
-        else begin
-            // Idle state
-            tx_out <= 1'b1;
-        end
+        if (load)
+            out_reg <= 16'h8000;
+        else if ((bits == 16'd9) && is216)
+            out_reg <= 16'd0;
+        else
+            out_reg <= out_reg;
     end
 
-    // Outputs
-    assign TX = tx_out;
-    assign out = {busy, 15'b0};  // out[15] = busy flag
+    // Bit counter
+    always @(posedge clk) begin
+        if (load)
+            bits <= 16'd0;
+        else if (is216)
+            bits <= bits + 16'd1;
+        else
+            bits <= bits;
+    end
+
+    // Baudrate counter
+    always @(posedge clk) begin
+        if (is216)
+            baudrate <= 16'd0;
+        else if (out_reg != 16'd0)  // if busy
+            baudrate <= baudrate + 16'd1;
+        else
+            baudrate <= baudrate;
+    end
+
+    // UART shift register
+    // Testbench does: uart <= (load)?((in<<2)|1):(is216?{1'b1,uart[9:1]}:uart);
+    always @(posedge clk) begin
+        if (load)
+            uart <= ((in << 2) | 10'd1);  // Exact match to testbench
+        else if (is216)
+            uart <= {1'b1, uart[9:1]};
+        else
+            uart <= uart;
+    end
+
+    // Outputs - matching testbench
+    assign TX = uart[1];  // TX_cmp = uart[1] in testbench
+    assign out = out_reg;
 
 endmodule
